@@ -5,6 +5,9 @@
  */
 package batalhanavalfinal;
 
+import static batalhanavalfinal.Tabuleiro.imprimirTabuleiro;
+import static batalhanavalfinal.Tabuleiro.inicializarTabuleiro;
+import static batalhanavalfinal.Tabuleiro.loadTabuleiro;
 import java.io.File;
 import java.util.Scanner;
 
@@ -65,47 +68,6 @@ public class BatalhaNavalFinal {
 
     }
 
-    public static void inicializarTabuleiro(char casa) {
-
-        for (int L = 0; L < 10; L++) {
-            for (int C = 0; C < 10; C++) {
-                tabuleiro[L][C] = new Tabuleiro();
-                tabuleiro[L][C].casa = casa;
-            }
-        }
-
-    }
-
-    public static void loadTabuleiro(File arquivo, int[] embarcacoes) {
-//        percorrer todas as linhas do arquivo
-
-        try {
-            Scanner scan = new Scanner(arquivo);
-            while (scan.hasNextLine()) {
-                String linha = scan.nextLine();
-                String[] val = new String[4];
-                val = linha.split(" ");
-                tabuleiro[Integer.parseInt(val[0])][Integer.parseInt(val[1])].casa = val[2].charAt(0);
-                tabuleiro[Integer.parseInt(val[0])][Integer.parseInt(val[1])].iEmbarcacao = Integer.parseInt(val[3]);
-                embarcacoes[Integer.parseInt(val[3])]++;
-            }
-        } catch (Exception e) {
-
-        }
-    }
-
-    public static int verificarTabuleiro(char tabuleiro[], int L, int C, char embarcacao) {
-//        verifica o tabuleiro volta 1 se certo  se0 errado
-/*
-TODO:
-a. ultrapassa os limites do tabuleiro;
-b. utiliza uma casa já ocupada;
-c. encosta em uma outra embarcação.
-
-         */
-        return 1;
-    }
-
     //variaveis para obter informações sobre os tiros
     // dentro de cada case vai obtendo numeros sobre os tiros
     public static void atirar(int L, int C, int[] embarcacoes) {
@@ -145,9 +107,7 @@ c. encosta em uma outra embarcação.
                 qtdBalasSubmarino = 0;
             }
 
-        }
-
-       else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'D') {
+        } else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'D') {
 
             System.out.println("Você acertou um Destroyer! ");
             System.out.println("vida antes do tiro: " + embarcacoes[tabuleiro[L][C].iEmbarcacao]);
@@ -163,9 +123,7 @@ c. encosta em uma outra embarcação.
                 qtdBalasDestroyer = 0;
             }
 
-        }
-
-       else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'C') {
+        } else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'C') {
 
             System.out.println("Você acertou um Cruzador! ");
             System.out.println("vida antes do tiro: " + embarcacoes[tabuleiro[L][C].iEmbarcacao]);
@@ -180,9 +138,7 @@ c. encosta em uma outra embarcação.
                 System.out.println("Afundou um Cruzador");
                 qtdBalasCruzador = 0;
             }
-        }
-
-       else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'P') {
+        } else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'P') {
 
             System.out.println("Você acertou um Porta-Avião! ");
             System.out.println("vida antes do tiro: " + embarcacoes[tabuleiro[L][C].iEmbarcacao]);
@@ -197,9 +153,7 @@ c. encosta em uma outra embarcação.
                 System.out.println("Afundou um porta-avião");
                 qtdBalasPortaAviao = 0;
             }
-        }
-
-        else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'S') {
+        } else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'S') {
 
             System.out.println("Você acertou um Submarino! ");
             System.out.println("Vida antes do tiro: " + embarcacoes[tabuleiro[L][C].iEmbarcacao]);
@@ -215,9 +169,7 @@ c. encosta em uma outra embarcação.
                 qtdBalasSubmarino = 0;
             }
 
-        }
-
-       else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'D') {
+        } else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'D') {
 
             System.out.println("Você acertou um Destroyer! ");
             System.out.println("vida antes do tiro: " + embarcacoes[tabuleiro[L][C].iEmbarcacao]);
@@ -233,9 +185,7 @@ c. encosta em uma outra embarcação.
                 qtdBalasDestroyer = 0;
             }
 
-        }
-
-       else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'C') {
+        } else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'C') {
 
             System.out.println("Você acertou um Cruzador! ");
             System.out.println("vida antes do tiro: " + embarcacoes[tabuleiro[L][C].iEmbarcacao]);
@@ -250,9 +200,7 @@ c. encosta em uma outra embarcação.
                 System.out.println("Afundou um Cruzador");
                 qtdBalasCruzador = 0;
             }
-        }
-
-       else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'P') {
+        } else if (tabuleiro[L][C].casa != '#' && tabuleiro[L][C].casa == 'P') {
 
             System.out.println("Você acertou um Porta-Avião! ");
             System.out.println("vida antes do tiro: " + embarcacoes[tabuleiro[L][C].iEmbarcacao]);
@@ -268,31 +216,12 @@ c. encosta em uma outra embarcação.
                 qtdBalasPortaAviao = 0;
             }
         }
-        
-        
-        
+
     }
 
     public static void gerarLog(File arquivo) {
 
     }
 
-    public static void imprimirTabuleiro() {
-
-        System.out.println("  0 1 2 3 4 5 6 7 8 9");
-        for (int C = 0; C < 10; C++) {
-            System.out.print(C);
-            for (int L = 0; L < 10; L++) {
-                if (tabuleiro[C][L].secreto) {
-                    System.out.print(" #");
-
-                } else {
-                    System.out.print(" " + tabuleiro[C][L].casa);
-
-                }
-            }
-            System.out.println();
-        }
-    }
-
+    
 }
