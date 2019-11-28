@@ -12,10 +12,10 @@ import java.util.Scanner;
 
 /**
  *
- * @author joao_
+ * @author João Victor Damasceno, Lucas Farias Pacifico Albuquerque, Christian Herculano, George Wanderson
  */
 public class Tabuleiro {
-
+    
     char casa; // 0, X, S, D, C, P
     int iEmbarcacao; // índice da embarcação no vetor embarcações
     boolean secreto = true;
@@ -39,6 +39,7 @@ public class Tabuleiro {
         }
 
     }
+    public static int maxPT = 0;
 
     public static void loadTabuleiro(File arquivo, int[] embarcacoes) throws ArrayIndexOutOfBoundsException, FileNotFoundException {
 //        percorrer todas as linhas do arquivo
@@ -46,6 +47,7 @@ public class Tabuleiro {
         try {
             Scanner scan = new Scanner(arquivo);
             while (scan.hasNextLine()) {
+                maxPT++;
                 String linha = scan.nextLine();
                 String[] val = new String[4];
                 val = linha.split(" ");
@@ -57,12 +59,12 @@ public class Tabuleiro {
                 tabuleiro[Integer.parseInt(val[0])][Integer.parseInt(val[1])].casa = val[2].charAt(0);
                 tabuleiro[Integer.parseInt(val[0])][Integer.parseInt(val[1])].iEmbarcacao = Integer.parseInt(val[3]);
                 }else{
-                    System.out.println("TA ERRADO");
+                    System.out.println("O arquivo do tabuleiro contem algum erro.");
                 }
                 embarcacoes[Integer.parseInt(val[3])]++;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println(e);
+            System.out.println("Erro: Quantidade de embarcações suportadas: " + BatalhaNavalFinal.tabuleiro.length + ". Quantidade de embarcações no arquivo:" + e.getMessage() + " ou mais");
         } catch (FileNotFoundException e) {
             System.out.println(e);
         }
@@ -76,6 +78,7 @@ public class Tabuleiro {
         try {
             char casa = tabuleiro[x][y].casa;
         } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("O arquivo utrapassou os limites do tabuleiro!");
             return 0;
         }
 //   b. utiliza uma casa já ocupada;
@@ -135,7 +138,7 @@ public class Tabuleiro {
             if (redor[i] != 69 && redor[i] != 99) {
                 if (redor[i] != iEmbarcacao) {
                     System.out.println("Index da posição = " + "[" + i + "]" + redor[i]);
-                    System.out.println("Embarcaco em " + "[" + x + "]" + "[" + y + "]" + tabuleiro[x][y].iEmbarcacao);
+                    System.out.println("Embarcacao em " + "[" + x + "]" + "[" + y + "]" + tabuleiro[x][y].iEmbarcacao);
                     return 0;
                 }
 

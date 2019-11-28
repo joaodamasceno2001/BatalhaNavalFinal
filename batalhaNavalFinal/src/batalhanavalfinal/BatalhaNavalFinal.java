@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author joao_
+ * @author João Victor Damasceno, Lucas Farias Pacifico Albuquerque, Christian Herculano, George Wanderson
  */
 public class BatalhaNavalFinal {
 
@@ -53,7 +53,7 @@ public class BatalhaNavalFinal {
         Scanner tiro = new Scanner(System.in);
 
         while (op == true) {
-            if (qtdBalasNavio == 24) {
+            if (qtdBalasNavio == Tabuleiro.maxPT) {
                 System.out.println(("Parabéns você ganhou!" + "\nVocê gastou: " + qtdBalas + "tiros\nTiros na agua: " + Math.round((qtdBalasAgua * 100) / qtdBalas) + "% " + "\nTiros repetidos: " + Math.round((qtdBalasRepetidas * 100) / qtdBalas) + "% " + "\nTiros acertados: " + Math.round((qtdBalasNavio * 100) / qtdBalas) + "% "));
                 imprimirTabuleiro();
                 GravarArq.write("Parabéns você ganhou!" + "\nVocê gastou: " + qtdBalas + "tiros\nTiros na agua: " + Math.round((qtdBalasAgua * 100) / qtdBalas) + "% " + "\nTiros repetidos: " + Math.round((qtdBalasRepetidas * 100) / qtdBalas) + "% " + "\nTiros acertados: " + Math.round((qtdBalasNavio * 100) / qtdBalas) + "% ");

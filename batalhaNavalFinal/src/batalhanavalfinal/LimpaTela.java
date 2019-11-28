@@ -7,7 +7,7 @@ package batalhanavalfinal;
 
 /**
  *
- * @author joao_
+ * @author João Victor Damasceno, Lucas Farias Pacifico Albuquerque, Christian Herculano, George Wanderson
  */
 public class LimpaTela {
     
