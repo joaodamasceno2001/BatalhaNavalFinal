@@ -7,6 +7,7 @@ package batalhanavalfinal;
 
 import static batalhanavalfinal.BatalhaNavalFinal.tabuleiro;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -33,12 +34,13 @@ public class Tabuleiro {
             for (int C = 0; C < 10; C++) {
                 tabuleiro[L][C] = new Tabuleiro();
                 tabuleiro[L][C].casa = casa;
+                tabuleiro[L][C].iEmbarcacao = 69;
             }
         }
 
     }
 
-    public static void loadTabuleiro(File arquivo, int[] embarcacoes) {
+    public static void loadTabuleiro(File arquivo, int[] embarcacoes) throws ArrayIndexOutOfBoundsException, FileNotFoundException {
 //        percorrer todas as linhas do arquivo
 
         try {
@@ -47,31 +49,98 @@ public class Tabuleiro {
                 String linha = scan.nextLine();
                 String[] val = new String[4];
                 val = linha.split(" ");
+//                System.out.println("X:" + val[0]);
+//                System.out.println("Y:" + val[1]);
+//                System.out.println("Embarcação:" + val[2]);
+//                System.out.println("index:" + val[3]);
+                if (verificarTabuleiro(Integer.parseInt(val[0]), Integer.parseInt(val[1]), Integer.parseInt(val[3])) != 0) {
                 tabuleiro[Integer.parseInt(val[0])][Integer.parseInt(val[1])].casa = val[2].charAt(0);
                 tabuleiro[Integer.parseInt(val[0])][Integer.parseInt(val[1])].iEmbarcacao = Integer.parseInt(val[3]);
+                }else{
+                    System.out.println("TA ERRADO");
+                }
                 embarcacoes[Integer.parseInt(val[3])]++;
             }
-        } catch (Exception e) {
-
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e);
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
         }
-        
-        
+
     }
 
-   public static int verificarTabuleiro(char tabuleiro[], int L, int C, char embarcacao) {
-   //   verifica o tabuleiro volta 1 se certo  se0 errado
-   /*
-   TODO:
-   a. ultrapassa os limites do tabuleiro;
-   b. utiliza uma casa já ocupada;
-   c. encosta em uma outra embarcação.
+    public static int verificarTabuleiro(int x, int y, int iEmbarcacao) {
+        //   verifica o tabuleiro volta 1 se certo  se0 errado
+//   TODO:
+//   a. ultrapassa os limites do tabuleiro;
+        try {
+            char casa = tabuleiro[x][y].casa;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return 0;
+        }
+//   b. utiliza uma casa já ocupada;
+        if (tabuleiro[x][y].casa != '#') {
+           return 0;
+       }
+//   c. encosta em uma outra embarcação.
+        int[] redor = new int[8];
+//        superiores
+        if (x != 0) {
+            if (y != 0) {
+                redor[0] = tabuleiro[x - 1][y - 1].iEmbarcacao;
+            }else{
+                redor[0] = 99;
+            }
+            redor[1] = tabuleiro[x - 1][y].iEmbarcacao;
+            if (y != 9) {
+                redor[2] = tabuleiro[x - 1][y + 1].iEmbarcacao;
+            }else{
+                redor[2] = 99;
+            }
+        }else{
+            redor[0] = 99;
+            redor[1] = 99;
+            redor[2] = 99;
+        }
+//        Central
+        if (y != 0) {
+            redor[3] = tabuleiro[x][y - 1].iEmbarcacao;
+        }else{
+            redor[3] = 99;
+        }
+        if (y != 9) {
+            redor[4] = tabuleiro[x][y + 1].iEmbarcacao;
+        }else{
+            redor[4] = 99;
+        }
+//        inferiores
+        if (x != 9) {
+            if (y != 0) {
+                redor[5] = tabuleiro[x + 1][y - 1].iEmbarcacao;
+            }else{
+                redor[5] = 99;
+            }
+            redor[6] = tabuleiro[x + 1][y].iEmbarcacao;
+            if (y != 9) {
+                redor[7] = tabuleiro[x + 1][y + 1].iEmbarcacao;
+            }else{
+                redor[7] = 99;
+            }
+        }else{
+            redor[5] = 99;
+            redor[6] = 99;
+            redor[7] = 99;
+        }
+        for (int i = 0; i < 8; i++) {
+            if (redor[i] != 69 && redor[i] != 99) {
+                if (redor[i] != iEmbarcacao) {
+                    System.out.println("Index da posição = " + "[" + i + "]" + redor[i]);
+                    System.out.println("Embarcaco em " + "[" + x + "]" + "[" + y + "]" + tabuleiro[x][y].iEmbarcacao);
+                    return 0;
+                }
 
-         */
-           
-        
-   
-          
-   
+            }
+        }
         return 1;
     }
 
