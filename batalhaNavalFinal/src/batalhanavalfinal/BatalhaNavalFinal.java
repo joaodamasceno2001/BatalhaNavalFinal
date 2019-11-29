@@ -121,11 +121,15 @@ public class BatalhaNavalFinal {
                 qtdBalasNavio++;
                 qtdBalasSubmarino++;
                 GravarArq.write("\n" + "vida depois do tiro: " + embarcacoes[tabuleiro[L][C].iEmbarcacao] + "\n");
-                if (qtdBalasSubmarino == 1) { //quando chegar em 1 significa que afundou um submarino
+                if (embarcacoes[tabuleiro[L][C].iEmbarcacao] == 0) {
                     System.out.println("Afundou um submarino");
                     GravarArq.write("\nAfundou um submarino\n");
-                    qtdBalasSubmarino = 0; //colocando o contador para 0 novamente 
                 }
+//                if (qtdBalasSubmarino == 1) { //quando chegar em 1 significa que afundou um submarino
+//                    System.out.println("Afundou um submarino");
+//                    GravarArq.write("\nAfundou um submarino\n");
+//                    qtdBalasSubmarino = 0; //colocando o contador para 0 novamente 
+//                }
 
             } else if (tabuleiro[L][C].casa == 'D' && tabuleiro[L][C].secreto == true) { //se acertar um submarino que não foi acertado ainda
 
@@ -135,14 +139,14 @@ public class BatalhaNavalFinal {
                 tabuleiro[L][C].secreto = false;
                 embarcacoes[tabuleiro[L][C].iEmbarcacao]--;
                 System.out.println("vida depois do tiro: " + embarcacoes[tabuleiro[L][C].iEmbarcacao]);
+                
                 qtdBalas++;
                 qtdBalasNavio++;
                 qtdBalasDestroyer++;
                 GravarArq.write("\n" + "vida depois do tiro: " + embarcacoes[tabuleiro[L][C].iEmbarcacao] + "\n");
-                if (qtdBalasDestroyer == 2) { //vida do destroyer
+                if (embarcacoes[tabuleiro[L][C].iEmbarcacao] == 0) { //vida do destroyer
                     System.out.println("Afundou um destroyer");
                     GravarArq.write("\nAfundou um destroyer\n");
-                    qtdBalasDestroyer = 0;//colocando o contador para 0 novamente 
                 }
 
             } else if (tabuleiro[L][C].casa == 'C' && tabuleiro[L][C].secreto == true) {
@@ -157,10 +161,9 @@ public class BatalhaNavalFinal {
                 qtdBalasNavio++;
                 qtdBalasCruzador++;
                 GravarArq.write("\n" + "vida depois do tiro: " + embarcacoes[tabuleiro[L][C].iEmbarcacao] + "\n");
-                if (qtdBalasCruzador == 4) {
+                if (embarcacoes[tabuleiro[L][C].iEmbarcacao] == 0) {
                     System.out.println("Afundou um Cruzador");
                     GravarArq.write("\nAfundou um Cruzador\n");
-                    qtdBalasCruzador = 0; //colocando o contador para 0 novamente
                 }
             } else if (tabuleiro[L][C].casa == 'P' && tabuleiro[L][C].secreto == true) {
 
@@ -174,10 +177,9 @@ public class BatalhaNavalFinal {
                 qtdBalasNavio++;
                 qtdBalasPortaAviao++;
                 GravarArq.write("\n" + "vida depois do tiro: " + embarcacoes[tabuleiro[L][C].iEmbarcacao] + "\n");
-                if (qtdBalasPortaAviao == 5) {
+                if (embarcacoes[tabuleiro[L][C].iEmbarcacao] == 0) {
                     System.out.println("Afundou um porta-avião");
                     GravarArq.write("\nAfundou um porta-avião\n");
-                    qtdBalasPortaAviao = 0;
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) { //quando atirar fora do tabuleiro, dar ERRO.
